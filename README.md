@@ -15,7 +15,7 @@ A fully documented, blazingly fast, easy to use and work in progress touch contr
 - V4: Custom mobile keyboard, preset saving/loading. (PLANNED)
 
 # Documentation
-- The wiki is currently under construction.
+- You can refer to the [wiki](https://github.com/AtesQuik/atestouch/wiki) once its done.
 
 # LICENSE
 - atestouch is licensed under the MIT License. See the LICENSE file for more information.
