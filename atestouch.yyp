@@ -36,11 +36,11 @@
   "Folders": [
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Notes","folderPath":"folders/Notes.yy","order":3,},
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Objects","folderPath":"folders/Objects.yy","order":2,},
+    {"resourceType":"GMFolder","resourceVersion":"1.0","name":"atestouch","folderPath":"folders/Objects/atestouch.yy","order":1,},
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Rooms","folderPath":"folders/Rooms.yy","order":4,},
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Scripts","folderPath":"folders/Scripts.yy","order":1,},
-    {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Sprites","folderPath":"folders/Sprites.yy","order":0,},
-    {"resourceType":"GMFolder","resourceVersion":"1.0","name":"atestouch","folderPath":"folders/Objects/atestouch.yy","order":1,},
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"atestouch","folderPath":"folders/Scripts/atestouch.yy","order":1,},
+    {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Sprites","folderPath":"folders/Sprites.yy","order":0,},
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"atestouch demo","folderPath":"folders/Sprites/atestouch demo.yy","order":6,},
   ],
   "AudioGroups": [

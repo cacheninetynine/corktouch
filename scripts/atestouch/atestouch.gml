@@ -65,15 +65,15 @@ function atestouch_update() {
 					var boundary_y = yy + lengthdir_y(125 * size, dir);
 					var radius = range * size * 4;
 					var cling = point_in_rectangle(finger_x, finger_y, xx - radius, yy - radius, xx + width + radius, yy + height + radius);
-					var pull = point_in_circle(finger_x, finger_y, xx + width / 2, yy + height / 2, (width + height) / 4);
-					
-					
+					var pull = point_in_circle(finger_x, finger_y, xx + width / 2, yy + height / 2, (width + height) / 4);					
+					var offset = 8 * size;
+
+					atestouch_analog_action(joy_y < yy + center_y - deadzone - offset, up_key);
+					atestouch_analog_action(joy_y > yy + center_y + deadzone + offset, down_key);
+					atestouch_analog_action(joy_x > xx + center_x + deadzone + offset, right_key);
+					atestouch_analog_action(joy_x < xx + center_x - deadzone - offset, left_key);
+
 					if held && cling{
-						var offset = 8 * size;
-						atestouch_analog_action(joy_y < center_y - deadzone - offset, up_key);
-						atestouch_analog_action(joy_y > center_y + deadzone + offset, down_key);
-						atestouch_analog_action(joy_x > center_x + deadzone - offset, right_key);
-						atestouch_analog_action(joy_x < center_x - deadzone + offset, left_key);
 						atestouch_fingermap[? finger] = element;
 						if !pull {
 							joy_x = boundary_x + center_x;
