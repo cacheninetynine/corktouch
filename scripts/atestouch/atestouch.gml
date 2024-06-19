@@ -162,8 +162,9 @@ function atestouch_button_create(xx, yy, sprite, key, size = 0.7, special = fals
 	ds_list_add(atestouch_button, size);
 	ds_list_add(atestouch_button, key);
 	ds_list_add(atestouch_button, special); //some keys that dont get affected by global modifiers (like esc key in ptp)
-
 	ds_list_add(atestouch_elements, atestouch_button);
+
+	return ds_list_size(atestouch_elements) - 1;
 }
 
 function atestouch_analog_create(xx, yy, inner_sprite, outer_sprite, size = 1, range = 25, deadzone = 25, up_key = vk_up, down_key = vk_down, left_key = vk_left, right_key = vk_right) {
@@ -185,6 +186,8 @@ function atestouch_analog_create(xx, yy, inner_sprite, outer_sprite, size = 1, r
 	ds_list_add(atestouch_analog, inner_sprite);
 
 	ds_list_add(atestouch_elements, atestouch_analog);
+	
+	return ds_list_size(atestouch_elements) - 1;
 }
 
 function atestouch_analog_action(condition, key) {
@@ -199,21 +202,67 @@ function atestouch_analog_action(condition, key) {
 function atestouch_config_save() {
 	ini_open("atestouch.ini");
 	for (var element = 0; element < ds_list_size(atestouch_elements); element++) {
-			ini_write_string("Elements", "Element " + string(element), ds_list_write(atestouch_elements[| element]));
+		var atestouch_element = atestouch_elements[| element];
+		var xx = atestouch_element[| 1];
+		var yy = atestouch_element[| 2];
+		ini_write_string("Elements", "Element " + string(element) + " X", xx);
+		ini_write_string("Elements", "Element " + string(element) + " Y", yy);
 	}
 	ini_close();
 }
 
 function atestouch_config_load() {
-	ini_open("atestouch.ini");
-	for (var element = 0; element < ds_list_size(atestouch_elements); element++) {
-		ds_list_read(atestouch_elements[| element], ini_read_string("Elements", "Element " + string(element), "Element " + string(element)));
+	if file_exists("atestouch.ini") {
+		ini_open("atestouch.ini");
+		for (var element = 0; element < ds_list_size(atestouch_elements); element++) {
+			var atestouch_element = atestouch_elements[| element];
+			var xx = real(ini_read_string("Elements", "Element " + string(element) + " X", "xx"))
+			var yy = real(ini_read_string("Elements", "Element " + string(element) + " Y", "yy"))
+			var is_button = atestouch_element[| 0];
+			atestouch_element[| 1] = xx;
+			atestouch_element[| 2] = yy;
+			if !is_button {
+				var size = atestouch_element[| 4];
+				var sprite = atestouch_element[| 13];
+				var inner_width = size * sprite_get_width(sprite);
+				var inner_height = size * sprite_get_height(sprite);
+				atestouch_element[| 9] = xx + inner_width / 2;
+				atestouch_element[| 10] = yy + inner_height / 2;
+			}
+		}
+		ini_close();
 	}
-	ini_close();
 }
 
 function atestouch_editmode_toggle() {
 	is_edit = !is_edit;
 	atestouch_config_save();
+}
+
+function atestouch_element_modify_sprite(sprite, inner_sprite = spr_joystick) {
+	for (var element = 0; element < ds_list_size(atestouch_elements); element++) {
+		var atestouch_element = atestouch_elements[| element];
+		var is_button = atestouch_element[| 0]
+		atestouch_element[| 3] = sprite;
+		if !is_button {
+			atestouch_element[| 13] = inner_sprite;
+		}
+	}
+}
+function atestouch_element_modify_size(size) {  //made this just because baldi has an option to toggle button sizes
+	for (var element = 0; element < ds_list_size(atestouch_elements); element++) {
+		var atestouch_element = atestouch_elements[| element];
+		atestouch_element[| 4] = size;
+	}
+}
+
+function atestouch_element_delete(element) {
+		ds_list_delete(atestouch_elements, element);
+}
+
+function atestouch_element_delete_all() {
+	for (var element = ds_list_size(atestouch_elements); element >= 0; element--) {
+		ds_list_delete(atestouch_elements, element);
+	}
 }
 #endregion
