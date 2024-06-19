@@ -239,8 +239,8 @@ function atestouch_editmode_toggle() {
 	atestouch_config_save();
 }
 
-function atestouch_element_modify_sprite(sprite, inner_sprite = spr_joystick) {
-	for (var element = 0; element < ds_list_size(atestouch_elements); element++) {
+function atestouch_element_modify_sprite(sprite, element = -1, inner_sprite = spr_joystick) {
+	if element != -1 {
 		var atestouch_element = atestouch_elements[| element];
 		var is_button = atestouch_element[| 0]
 		atestouch_element[| 3] = sprite;
@@ -249,7 +249,8 @@ function atestouch_element_modify_sprite(sprite, inner_sprite = spr_joystick) {
 		}
 	}
 }
-function atestouch_element_modify_size(size) {  //made this just because baldi has an option to toggle button sizes
+
+function atestouch_element_modify_size_all(size) {  //made this just because baldi has an option to toggle button sizes
 	for (var element = 0; element < ds_list_size(atestouch_elements); element++) {
 		var atestouch_element = atestouch_elements[| element];
 		atestouch_element[| 4] = size;
