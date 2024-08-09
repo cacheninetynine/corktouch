@@ -191,12 +191,10 @@ function atestouch_analog_create(xx, yy, inner_sprite, outer_sprite, size = 1, r
 }
 
 function atestouch_analog_action(condition, key) {
-	if condition {
+	if condition
 		keyboard_key_press(key);
-	}
-	else {
+	else
 		keyboard_key_release(key);
-	}
 }
 
 function atestouch_config_save() {
@@ -205,8 +203,8 @@ function atestouch_config_save() {
 		var atestouch_element = atestouch_elements[| element];
 		var xx = atestouch_element[| 1];
 		var yy = atestouch_element[| 2];
-		ini_write_string("Elements", "Element " + string(element) + " X", xx);
-		ini_write_string("Elements", "Element " + string(element) + " Y", yy);
+		ini_write_string("Elements", "elem" + string(element) + " X", xx);
+		ini_write_string("Elements", "elem" + string(element) + " Y", yy);
 	}
 	ini_close();
 }
@@ -216,8 +214,8 @@ function atestouch_config_load() {
 		ini_open("atestouch.ini");
 		for (var element = 0; element < ds_list_size(atestouch_elements); element++) {
 			var atestouch_element = atestouch_elements[| element];
-			var xx = real(ini_read_string("Elements", "Element " + string(element) + " X", "xx"))
-			var yy = real(ini_read_string("Elements", "Element " + string(element) + " Y", "yy"))
+			var xx = real(ini_read_string("Elements", "elem" + string(element) + " X", "xx"))
+			var yy = real(ini_read_string("Elements", "elem" + string(element) + " Y", "yy"))
 			var is_button = atestouch_element[| 0];
 			atestouch_element[| 1] = xx;
 			atestouch_element[| 2] = yy;
